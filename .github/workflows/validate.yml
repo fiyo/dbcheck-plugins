@@ -1,0 +1,78 @@
+name: Validate Plugins
+
+on:
+  pull_request:
+    paths:
+      - 'plugins/**'
+      - 'registry.json'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate plugin.json files
+        run: |
+          errors=0
+          for dir in plugins/*/; do
+            plugin_json="${dir}plugin.json"
+            init_py="${dir}__init__.py"
+            
+            echo "检查: $dir"
+            
+            # 必需文件检查
+            if [ ! -f "$plugin_json" ]; then
+              echo "  ❌ 缺少 plugin.json"
+              errors=$((errors+1))
+              continue
+            fi
+            if [ ! -f "$init_py" ]; then
+              echo "  ❌ 缺少 __init__.py"
+              errors=$((errors+1))
+              continue
+            fi
+            
+            # JSON 语法检查
+            if ! python3 -m json.tool "$plugin_json" > /dev/null 2>&1; then
+              echo "  ❌ plugin.json 格式错误"
+              errors=$((errors+1))
+              continue
+            fi
+            
+            # 必需字段检查
+            required_fields="name version description author license"
+            for field in $required_fields; do
+              if ! python3 -c "import json; d=json.load(open('$plugin_json')); assert '$field' in d" 2>/dev/null; then
+                echo "  ❌ 缺少必需字段: $field"
+                errors=$((errors+1))
+              fi
+            done
+            
+            echo "  ✅ 通过"
+          done
+          
+          if [ $errors -gt 0 ]; then
+            echo "共 $errors 个错误"
+            exit 1
+          fi
+          echo "所有插件验证通过 ✅"
+
+      - name: Validate registry.json
+        run: |
+          python3 -m json.tool registry.json > /dev/null || { echo "registry.json 格式错误"; exit 1; }
+          echo "registry.json ✅"
+
+      - name: Check JSON Schema
+        run: |
+          python3 -c "
+          import json
+          with open('registry.json') as f:
+              data = json.load(f)
+          assert 'version' in data, '缺少 version'
+          assert 'plugins' in data, '缺少 plugins'
+          for p in data['plugins']:
+              for field in ['id', 'name', 'version', 'download', 'category']:
+                  assert field in p, f'插件 {p.get(\"id\",\"?\")} 缺少 {field}'
+          print('Schema 验证通过')
+          "

@@ -1,0 +1,25 @@
+{
+  "name": "demo-ascii-table-check",
+  "version": "0.1.0",
+  "title": "ASCII字符集表检测（Demo）",
+  "description": "演示插件：检测数据库中是否存在非ASCII字符集的表，评估多语言兼容性风险。适合作为插件开发入门参考。",
+  "author": {
+    "name": "DBCheck Team",
+    "email": "sdfiyon@gmail.com",
+    "url": "https://github.com/fiyo"
+  },
+  "icon": "",
+  "homepage": "https://github.com/fiyo/dbcheck-plugins/tree/main/plugins/demo-ascii-table-check",
+  "license": "MIT",
+  "keywords": ["demo", "charset", "inspection", "tutorial"],
+  "categories": ["inspection"],
+  "dbcheck": {
+    "minVersion": "2.5.0"
+  },
+  "capabilities": {
+    "inspections": ["ascii_table_check"]
+  },
+  "permissions": ["database:*:read"],
+  "dependencies": {},
+  "entry": "__init__.py"
+}

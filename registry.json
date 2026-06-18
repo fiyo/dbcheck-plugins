@@ -1,0 +1,25 @@
+{
+  "version": "1",
+  "updated": "2026-06-18T18:00:00Z",
+  "description": "DBCheck 插件市场索引 — 在此提交 PR 上架你的插件",
+  "plugins": [
+    {
+      "id": "demo-ascii-table-check",
+      "name": "ASCII字符集表检测（Demo）",
+      "version": "0.1.0",
+      "author": "DBCheck Team",
+      "description": "演示插件：检测数据库中非ASCII字符集的表，评估多语言兼容性风险。展示 InspectionPlugin 完整开发流程。",
+      "download": "https://github.com/fiyo/dbcheck-plugins/releases/download/demo-v0.1.0/demo-ascii-table-check-0.1.0.zip",
+      "homepage": "https://github.com/fiyo/dbcheck-plugins/tree/main/plugins/demo-ascii-table-check",
+      "category": "inspection",
+      "keywords": ["demo", "charset", "inspection", "tutorial"],
+      "db_types": ["mysql", "oracle", "postgresql", "dm8"],
+      "min_dbcheck_version": "2.5.0",
+      "license": "MIT",
+      "downloads": 0,
+      "rating": 5.0,
+      "reviews": 0,
+      "verified": true
+    }
+  ]
+}
