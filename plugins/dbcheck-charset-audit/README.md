@@ -1,30 +1,30 @@
-# ASCII字符集表检测（Demo）
+# 字符集与排序规则审计
 
-DBCheck 插件入门示例，展示 InspectionPlugin 开发流程。
+DBCheck 官方插件 —— 支持全部 10 种数据库的字符集和排序规则检查。
 
-## 功能
+## 覆盖范围
 
-检测数据库中非ASCII字符集的表，评估多语言兼容性风险：
-- 支持 MySQL（information_schema.tables）
-- 支持 PostgreSQL（pg_catalog.pg_tables）
-- 支持 Oracle / DM8（后续扩展）
+| 数据库 | 检查内容 |
+|--------|---------|
+| MySQL / TiDB | 表级 `table_collation`、库级 `DEFAULT_CHARACTER_SET_NAME` |
+| PostgreSQL / IvorySQL / KingbaseES | 库级编码（`pg_database`）、列级排序规则 |
+| Oracle / DM8 / YashanDB | `NLS_CHARACTERSET` 参数、列级 `CHARACTER_SET_NAME` |
+| SQL Server | 库级 `collation_name`、列级 `collation_name` |
+| GBase 8s | `sysdbslocale` 语言环境 |
+
+## 风险规则
+
+| 等级 | 触发条件 |
+|:---:|---------|
+| HIGH | 数据库或表使用非 UTF8 字符集/排序规则 |
+| MEDIUM | 超过 50 个列/表使用非标准排序规则 |
+| LOW | 少数列使用非标准排序规则 |
 
 ## 安装
 
-在 DBCheck Web UI → 插件市场 → 搜索「ASCII」→ 一键安装。
+DBCheck Web UI → 插件市场 → 搜索「字符集」→ 一键安装。
 
 或手动安装：
 ```bash
-cp -r demo-ascii-table-check /path/to/DBCheck/plugins/
+cp -r dbcheck-charset-audit /path/to/DBCheck/plugins/
 ```
-
-## 规则
-
-| 风险等级 | 触发条件 |
-|---------|---------|
-| MEDIUM | 超过 50 个非标准字符集的表 |
-| LOW | 1~50 个非标准字符集的表 |
-
-## 开发者
-
-本插件同时是 DBCheck 插件开发的教学示例，完整代码见 `__init__.py`。
