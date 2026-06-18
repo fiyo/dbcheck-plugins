@@ -101,13 +101,15 @@ register(MyChecker())
 
 1. Fork [fiyo/dbcheck-plugins](https://github.com/fiyo/dbcheck-plugins)
 2. 在 `plugins/` 下创建你的插件目录
-3. 编辑 `registry.json`，在 `plugins` 数组中追加你的条目：
+3. 在你自己仓库创建 Release，上传 `.zip` 包
+4. 编辑 `registry.json`，在 `plugins` 数组中追加你的条目：
    ```json
    {
      "id": "my-plugin",
      "name": "我的插件",
      "version": "1.0.0",
      "author": "你的名字",
+     "author_type": "community",
      "description": "插件描述",
      "download": "https://github.com/你的用户名/仓库/releases/download/v1.0.0/xxx.zip",
      "category": "inspection",
@@ -118,7 +120,20 @@ register(MyChecker())
      "verified": false
    }
    ```
-4. 提 PR → CI 自动验证 → 等待审核合并 🎉
+5. 提 PR → CI 自动验证 → 等待审核合并 🎉
+
+## 官方插件 vs 社区插件
+
+| 字段 | 官方 | 社区 |
+|------|------|------|
+| `author_type` | `"official"` | `"community"` |
+| `verified` | `true` | `false`（审核通过后可改 `true`） |
+| 维护方 | DBCheck Team | 插件作者 |
+| 代码仓库 | `fiyo/dbcheck-plugins` | 开发者自己的仓库 |
+| Release | 官方 Release | 你自己的 GitHub Release |
+| 前端标识 | 🟢 **✅ 官方** | 🟠 **👤 社区**（未验证）/ 🔵 **✅ 已验证**（已审核） |
+
+**社区插件变更为已验证**：插件质量稳定、用户反馈良好后，由 DBCheck Team 审核并将 `verified` 改为 `true`，前端标识自动变为 🔵「✅ 已验证」。
 
 ## 本地测试
 

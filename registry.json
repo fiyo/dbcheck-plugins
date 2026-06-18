@@ -1,14 +1,15 @@
 {
   "version": "1",
-  "updated": "2026-06-18T19:00:00Z",
-  "description": "DBCheck 插件市场索引",
+  "updated": "2026-06-18T19:40:00Z",
+  "description": "DBCheck 插件市场索引 — author_type: official(官方维护) / community(社区贡献)",
   "plugins": [
     {
       "id": "dbcheck-charset-audit",
       "name": "字符集与排序规则审计",
       "version": "1.0.0",
       "author": "DBCheck Team",
-      "description": "官方插件：全面检测10种数据库的非标准字符集和排序规则，评估跨平台兼容性风险。支持 MySQL/TiDB/PostgreSQL/Oracle/DM8/SQL Server/YashanDB/Kingbase/IvorySQL/GBase 8s。",
+      "author_type": "official",
+      "description": "全面检测10种数据库的非标准字符集和排序规则，评估跨平台兼容性风险。支持 MySQL/TiDB/PostgreSQL/Oracle/DM8/SQL Server/YashanDB/Kingbase/IvorySQL/GBase 8s。",
       "download": "https://github.com/fiyo/dbcheck-plugins/releases/download/charset-v1.0.0/dbcheck-charset-audit-1.0.0.zip",
       "homepage": "https://github.com/fiyo/dbcheck-plugins/tree/main/plugins/dbcheck-charset-audit",
       "category": "inspection",
