@@ -13,7 +13,7 @@
   "keywords": ["charset", "encoding", "collation", "utf8", "compatibility", "official"],
   "categories": ["inspection"],
   "dbcheck": {
-    "minVersion": "2.5.0"
+    "minVersion": "2.6.0"
   },
   "capabilities": {
     "inspections": ["charset_audit"]
