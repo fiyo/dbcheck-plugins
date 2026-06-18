@@ -28,3 +28,4 @@ DBCheck Web UI → 插件市场 → 搜索「字符集」→ 一键安装。
 ```bash
 cp -r dbcheck-charset-audit /path/to/DBCheck/plugins/
 ```
+
